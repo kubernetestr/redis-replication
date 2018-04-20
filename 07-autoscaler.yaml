@@ -1,0 +1,34 @@
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: redis-rs
+  name: redis-rs-autoscaler
+spec:
+  maxReplicas: 10
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: StatefulSet
+    name: redis
+  targetCPUUtilizationPercentage: 70
+status:
+  currentReplicas: 3
+  desiredReplicas: 3
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  namespace: redis-rs
+  name: redis-rs-sentinel-autoscaler
+spec:
+  maxReplicas: 10
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: extensions/v1beta1
+    kind: StatefulSet
+    name: redis-sentinel
+  targetCPUUtilizationPercentage: 70
+status:
+  currentReplicas: 3
+  desiredReplicas: 3
