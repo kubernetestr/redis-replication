@@ -30,4 +30,3 @@
 
 ### Delete the master pod:
 - `kubectl delete pods --namespace=redis-common redis-master`
-
